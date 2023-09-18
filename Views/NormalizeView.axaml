@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="Analog.Views.NormalizeView"
+             xmlns:vm="using:Analog.ViewModels"
+             x:DataType="vm:NormalizeViewModel">
+    <DockPanel>
+        <Button DockPanel.Dock="Top"
+                Command="{Binding OpenFileAsyncCommand}">Open File</Button>
+        <Button DockPanel.Dock="Bottom"
+                Command="{ReflectionBinding $parent[Window].DataContext.Analyze}">Analyze</Button>
+        <!-- <Button DockPanel.Dock="Bottom"
+                Command="{Binding AnalyzeCommand}">Analyze</Button> -->
+        <StackPanel>
+            
+        </StackPanel>
+    </DockPanel>
+</UserControl>

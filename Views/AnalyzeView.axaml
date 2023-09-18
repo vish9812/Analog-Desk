@@ -1,0 +1,99 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="600"
+             d:DesignHeight="300"
+             x:Class="Analog.Views.AnalyzeView"
+             xmlns:vm="using:Analog.ViewModels"
+             x:DataType="vm:AnalyzeViewModel">
+    <DockPanel x:Name="TopContainer">
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Spacing="4">
+            <Label>Start Time</Label>
+            <TextBox />
+            <Label>End Time</Label>
+            <TextBox />
+            <Label>Search Term</Label>
+            <TextBox />
+            <Button>Search</Button>
+            <Button>Show Top Messages</Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Spacing="4">
+            <StackPanel Spacing="4">
+                <TextBlock>Sort</TextBlock>
+                <RadioButton GroupName="Timestamp"
+                             Content="Ascending" />
+                <RadioButton GroupName="Timestamp"
+                             Content="Descending" />
+                <TextBlock>Toggle Columns</TextBlock>
+                <ItemsControl ItemsSource="{Binding Fields}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Margin="4"
+                                      IsChecked="{Binding IsChecked}"
+                                      Content="{Binding Name}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <DataGrid Margin="20"
+                      CanUserSortColumns="False"
+                      CanUserResizeColumns="True"
+                      CanUserReorderColumns="True"
+                      IsReadOnly="True"
+                      GridLinesVisibility="All"
+                      BorderThickness="2"
+                      BorderBrush="Gray"
+                      HorizontalScrollBarVisibility="Visible"
+                      VerticalScrollBarVisibility="Visible"
+                      ItemsSource="{Binding Logs}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Timestamp"
+                                        Binding="{Binding Timestamp}" />
+                    <DataGridTextColumn Header="Level"
+                                        Binding="{Binding Level}" />
+                    <DataGridTemplateColumn Header="Message"
+                                            MaxWidth="500">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Button x:CompileBindings="False" DockPanel.Dock="Bottom" Command="{Binding #TopContainer.DataContext.ShowFullDataCommand}"
+                                            CommandParameter="{Binding #message.Text}">
+                                        Show Full Data
+                                    </Button>
+                                    <TextBox Margin="5"
+                                        x:Name="message"
+                                        IsReadOnly="True"
+                                        AcceptsReturn="True"
+                                             Text="{Binding Message}" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Data"
+                                            MaxWidth="700">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Button x:CompileBindings="False" DockPanel.Dock="Bottom" Command="{Binding #TopContainer.DataContext.ShowFullDataCommand}"
+                                            CommandParameter="{Binding #data.Text}">
+                                        Show Full Data
+                                    </Button>
+                                    <TextBox Margin="5"
+                                    x:Name="data"
+                                    IsReadOnly="True"
+                                        AcceptsReturn="True"
+                                             Text="{Binding Data}" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="800"
+        d:DesignHeight="450"
+        x:Class="Analog.Views.FullDataWindow"
+        Title="Full Data View"
+        WindowStartupLocation="CenterOwner"
+        Width="500"
+        Height="500"
+        xmlns:vm="using:Analog.ViewModels"
+        x:DataType="vm:FullDataViewModel">
+        <TextBox Margin="50"
+                   Text="{Binding Text}"
+                   Height="400"
+                   Width="400"
+                   AcceptsReturn="True"/>
+</Window>
